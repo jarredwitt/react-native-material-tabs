@@ -62,9 +62,6 @@ const MaterialTabs: React.FC<Props> = ({
       bar.current.measure((_, b, width) => {
         getTabWidth(width);
       });
-
-    selectTab();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, barWidth]);
 
   const getAnimateValues = () => {
@@ -97,8 +94,8 @@ const MaterialTabs: React.FC<Props> = ({
 
     setBarWidth(width);
   };
-
-  const selectTab = () => {
+  
+  useEffect(() => {
     const values = getAnimateValues();
 
     Animated.spring(indicatorPosition, {
@@ -113,7 +110,7 @@ const MaterialTabs: React.FC<Props> = ({
         x: values.scrollPosition,
       });
     }
-  };
+  }, [selectedIndex]);
 
   return (
     items && (
